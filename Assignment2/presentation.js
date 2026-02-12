@@ -1,16 +1,21 @@
-const prompt = require('prompt-sync')
+const prompt = require('prompt-sync')()
 const business = require('./business')
-const persistence = require('./persistence')
 
+/**
+ * 
+ */
 async function displayEmployess() {
-    let employees = await persistence.getEmployees()
-    console.log('Emplyee ID  Name                  Phone')
+    let employees = await business.getAllEmployees()
+    console.log('Employee ID  Name                  Phone')
     console.log('----------- --------------------- -----------')
     for (let e of employees) {
         console.log(`${e.employeeId.padEnd(13)}${e.name.padEnd(20)}${e.phone}`)
     }
 }
 
+/**
+ * 
+ */
 async function addNewEmployee() {
     let name = prompt('Enter employee name: ')
     let phone = prompt('Enter phone number: ')
@@ -18,14 +23,20 @@ async function addNewEmployee() {
     console.log('A new employee was add... ')
 }
 
+/**
+ * 
+ */
 async function scheduleEmployee() {
     let empId = prompt('Enter emplyee ID: ')
     let shiftId = prompt('Enter shift ID: ')
     let result = await business.assignShift(empId, shiftId)
-    console.log(result === 'OK' ? 'Shift Recorded' : result)
+    console.log(result === 'Ok' ? 'Shift Recorded' : result)
     
 }
 
+/**
+ * 
+ */
 async function viewEmployeeSchedule() {
     let empId = prompt('Enter employee ID: ')
     let shifts = await business.getEmployeeSchedule(empId)
