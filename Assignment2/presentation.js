@@ -1,5 +1,40 @@
-const prompt = require("prompt-sync")
-const business = require("./business")
+const prompt = require('prompt-sync')
+const business = require('./business')
+const persistence = require('./persistence')
+
+async function displayEmployess() {
+    let employees = await persistence.getEmployees()
+    console.log('Emplyee ID  Name                  Phone')
+    console.log('----------- --------------------- -----------')
+    for (let e of employees) {
+        console.log(`${e.employeeId.padEnd(13)}${e.name.padEnd(20)}${e.phone}`)
+    }
+}
+
+async function addNewEmployee() {
+    let name = prompt('Enter employee name: ')
+    let phone = prompt('Enter phone number: ')
+    await business.createEmployee(name, phone)
+    console.log('A new employee was add... ')
+}
+
+async function scheduleEmployee() {
+    let empId = prompt('Enter emplyee ID: ')
+    let shiftId = prompt('Enter shift ID: ')
+    let result = await business.assignShift(empId, shiftId)
+    console.log(result === 'OK' ? 'Shift Recorded' : result)
+    
+}
+
+async function viewEmployeeSchedule() {
+    let empId = prompt('Enter employee ID: ')
+    let shifts = await business.getEmployeeSchedule(empId)
+    console.log('\n')
+    console.log('date,start,end')
+    for (let shift of shifts) {
+        console.log(`${shift.date},${shift.startTime},${shift.endTime}`)
+    }
+}
 
 /**
  * Main function to run the applicaion 
@@ -13,16 +48,16 @@ async function displayMenu() {
         console.log('5. Exit')
         let selection = Number(prompt("What is your choice> "))
         if (selection == 1){
-            await listEmployees()
+            await displayEmployess()
         } 
         else if (selection == 2){
-            await addEmployee()
+            await addNewEmployee()
         }
         else if (selection == 3){
-            await assignEmployeeToShift()
+            await scheduleEmployee()
         }
         else if (selection == 4){
-            await viewEmployeeSchedule
+            await viewEmployeeSchedule()
         }
         else if (selection == 5){
             break // leave the loop
