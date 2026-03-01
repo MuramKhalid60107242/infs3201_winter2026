@@ -89,7 +89,7 @@ app .post("/editEmployee", async (req, res) => {
     }
 
     if (!phonePattern.test(updatePhone)){
-        res.send("Phone must bi in fprmat ####-####")
+        res.send("Phone must be in format ####-#### ")
         return
     }
 
