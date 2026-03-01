@@ -1,6 +1,10 @@
 const prompt = require('prompt-sync')()
 const business = require('./business')
 
+//I used the professor solution to solve assignment2
+
+
+
 /**
  * 
  */

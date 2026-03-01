@@ -1,5 +1,8 @@
 const persistence = require('./persistence')
 
+//I used the professor solution to solve assignment2
+
+
 /**
  * return all employees
  * @returns {Array}

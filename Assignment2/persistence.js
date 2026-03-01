@@ -1,5 +1,9 @@
 const fs = require("fs/promises")
 
+//I used the professor solution to solve assignment2
+
+
+
 async function getEmployees(){
     let data = await fs.readFile('employees.json');
     return JSON.parse(data)
@@ -16,7 +20,7 @@ async function findEmployee(empId) {
 }
 
 async function findShift(shiftId) {
-    let data = await fs.readFile('shfts.json')
+    let data = await fs.readFile('shifts.json')
     let shifts = JSON.parse(data)
     for (let shift of shifts) {
         if (shift.shiftId === shiftId) {
@@ -41,7 +45,7 @@ async function addAssignment(empId, shiftId) {
     let data = await fs.readFile('assignments.json')
     let assignments = JSON.parse(data)
     assignments.push({employeeId: empId, shiftId: shiftId})
-    await fs.writeFile('assignments.json', JSON.stringify(assignment,null,4))
+    await fs.writeFile('assignments.json', JSON.stringify(assignments,null,4))
 }
 
 async function addEmployeeRecord(emp) {
