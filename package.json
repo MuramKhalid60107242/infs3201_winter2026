@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "express": "^5.2.1",
-    "express-handlebars": "^8.0.6",
-    "mongo": "^0.1.0",
-    "promises": "^0.2.5"
-  }
-}
