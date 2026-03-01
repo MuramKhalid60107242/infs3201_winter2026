@@ -1,11 +1,10 @@
 const persistence = require("./persistence")
 
-
 /**
- * 
+ * Calculate shift duration in hours
  * @param {string} from 
  * @param {string} to 
- * @returns {number}
+ * @returns {number} duration in hours
  */
 function calculateHours(from, to){
     const fromSplit = from.split(":")
@@ -20,8 +19,8 @@ function calculateHours(from, to){
 }
 
 /**
- * 
- * @returns 
+ * Return all the employees
+ * @returns {Promise<Array>}
  */
 async function listEmployees() {
     const employees = await persistence.loadAllEmployees()
@@ -29,18 +28,18 @@ async function listEmployees() {
 }
 
 /**
- * 
+ * find an emolyee by ID
  * @param {string} employeeId 
- * @returns 
+ * @returns {Promise<Object|undefined}
  */
 async function getEmployee(employeeId) {
     return await persistence.getEmployeeById(employeeId)
 }
 
 /**
- * 
- * @param {*} employeeId 
- * @returns 
+ * get all the shifts of an employee
+ * @param {string} employeeId 
+ * @returns {Promise<Array}
  */
 async function listEmployeeShifts(employeeId) {
     const shifts = await persistence.loadEmployeeShifts(employeeId)
@@ -48,12 +47,12 @@ async function listEmployeeShifts(employeeId) {
 }
 
 /**
- * 
- * @param {*} employeeId 
- * @param {*} newValues 
+ * update employee details
+ * @param {string} employeeId 
+ * @param {{name:string, phone:string}} newValues 
  */
 async function saveemployee(employeeId, newValues) {
-    await persistence.editEmployee(employeeId. newValues)
+    await persistence.editEmployee(employeeId, newValues)
 }
 
 

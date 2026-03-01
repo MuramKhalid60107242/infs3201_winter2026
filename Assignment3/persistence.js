@@ -1,33 +1,35 @@
 const mongodb = require("mongodb")
 const fs = require("fs/promises")
+const {setServers} = require('node:dns/promises')
+setServers(["1.1.1.1","8.8.8.8"])
 
 let client = undefined
 
 /**
- * 
+ * Connect to MongoDB
  * @returns 
  */
 
 async function connectToDatabase() {
     if (!client) {
-        client = new mongodb.MongoClient("")
+        client = new mongodb.MongoClient("mongodb+srv://Muram:12class34@infs3201.vjlzxtx.mongodb.net/")
         await client.connect()
     }
-    return client.db("")
+    return client.db("infs3201_winter2026")
 }
 
 /**
- * 
+ * load all the employees
+ * @returns {Promise<Array>}
  */
-
 async function loadAllEmployees() {
     const db = await connectToDatabase()
     return db.collection("employees").find({}).toArray()
 }
 
 /**
- * 
- * @param {*} id 
+ * find an employee by ID
+ * @param {string} id 
  * @returns 
  */
 async function getEmployeeById(id) {
@@ -36,9 +38,9 @@ async function getEmployeeById(id) {
 }
 
 /**
- * 
- * @param {*} id 
- * @param {*} updateInfo 
+ * update an employee details
+ * @param {string} id 
+ * @param {{name:string, phone:string}} updateInfo 
  */
 async function editEmployee(id, updateInfo) {
     const db = await connectToDatabase()
@@ -55,8 +57,8 @@ async function editEmployee(id, updateInfo) {
 }
 
 /**
- * 
- * @param {*} id 
+ * find an employee shif by an ID
+ * @param {string} id 
  * @returns 
  */
 async function getShiftById(id) {
@@ -64,6 +66,11 @@ async function getShiftById(id) {
     return db.collection("shifts").findOne({ shiftId: id})
 }
 
+/**
+ * get all the shift assigned to an employee
+ * @param {string} employeeId 
+ * @returns {Promise<Array>}
+ */
 async function loadEmployeeShifts(employeeId) {
     const db = await connectToDatabase()
 
