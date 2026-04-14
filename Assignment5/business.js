@@ -26,6 +26,18 @@ async function lookupUser(username) {
 }
 
 /**
+ * Builds a safe storage filename for an uploaded document.
+ *
+ * @param {string} originalFilename - The original filename supplied by the browser
+ * @param {string} uniquePrefix - A unique value such as an ObjectId string
+ * @returns {string}
+ */
+function makeStoredFilename(originalFilename, uniquePrefix) {
+    const sanitized = originalFilename.replace(/[^a-zA-Z0-9._-]/g, "_")
+    return uniquePrefix + "-" + sanitized
+}
+
+/**
  * Validates an uploaded file against allowed type, extension, and size limits.
  *
  * @param {string} mimeType - MIME type of the file
@@ -92,6 +104,7 @@ module.exports = {
     saveEmployeeChanges,
     fetchShiftsForEmployee,
     lookupUser,
+    makeStoredFilename,
     verifyUploadedFile,
     canEmployeeReceiveUpload,
     recordFileUpload
