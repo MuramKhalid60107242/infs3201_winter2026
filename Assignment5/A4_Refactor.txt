@@ -1,0 +1,27 @@
+Collection Changes:
+. shifts: is now going to have an embedded employees array.
+. employees: the employeeId field will go away.
+. assignments: this group will be removed.
+
+Persistence Layer Updates:
+- Removed functions:
+    .getAssignments()
+    .createAssignment()
+- Modified functions:
+    .getShifts() → changed to give out shifts with the employees array.
+    .assignEmployeeToShift() → will no longer use assignments to update the shift document; it will update the shift document directly.
+
+Business Logic Updates:
+. The shift.employees array will be directly updated with assignment operations.
+. Any queries should be done with ObjectId rather than employeeId or shiftId.
+
+Impact of Embedded Arrays:
+. Push and pull operations will be needed to make updates.
+. There should be no multiple entries of employees.
+. Firing a worker involves amending all shifts.
+
+Potential Risks:
+. Errors when converting to ObjectId
+. Bad references in the process of migration.
+. Redundant elements in the employees array.
+. Inability to completely eliminate legacy assignment logic.
