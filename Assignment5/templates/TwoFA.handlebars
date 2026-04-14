@@ -1,0 +1,12 @@
+<h1>Verify Your Identity</h1>
+<p>We sent a 6-digit code to your email address. Enter it below to continue.</p>
+
+{{#if message}}<p style="color:red">{{message}}</p>{{/if}}
+
+<form method="POST" action="/2fa">
+    <label>Verification Code:</label><br>
+    <input name="code" placeholder="______" maxlength="6" required pattern="\d{6}"><br><br>
+    <button type="submit">Confirm</button>
+</form>
+
+<p><a href="/login">Return to Sign In</a></p>
