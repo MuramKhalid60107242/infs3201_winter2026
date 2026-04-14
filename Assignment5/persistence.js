@@ -9,13 +9,12 @@ let dbClient
  */
 async function getDatabase() {
     if (!dbClient) {
-        dbClient = new mongodb.MongoClient("mongodb+srv://zeinab:12class34@cluster0.vgwl6zo.mongodb.net/")
+        dbClient = new mongodb.MongoClient("mongodb+srv://mrammamoon:12class344@cluster0.zhitj5l.mongodb.net/")
         await dbClient.connect()
     }
     return dbClient.db("infs3201_winter2026")
 }
 
-// ── Employee operations 
 
 async function getAllEmployees() {
     const db = await getDatabase()
@@ -48,7 +47,6 @@ async function getEmployeeShifts(empId) {
     return matched
 }
 
-// ── User operations ──────────────────────────────────────────────────────────
 
 async function findUser(username) {
     const db = await getDatabase()
@@ -66,7 +64,6 @@ async function createUser(username, password, email, role = "user") {
     })
 }
 
-// ── Session operations ───────────────────────────────────────────────────────
 
 async function createSession(sessionId, userData) {
     const db = await getDatabase()
@@ -95,14 +92,12 @@ async function removeSession(sessionId) {
     await db.collection("sessions").deleteOne({ _id: sessionId })
 }
 
-// ── Security logging ─────────────────────────────────────────────────────────
 
 async function writeSecurityLog(entry) {
     const db = await getDatabase()
     await db.collection("security_log").insertOne(entry)
 }
 
-// ── Login attempt tracking ───────────────────────────────────────────────────
 
 async function getLoginAttempts(username) {
     const db = await getDatabase()
@@ -142,7 +137,6 @@ async function isAccountLocked(username) {
     return record?.isLocked === true
 }
 
-// ── 2FA code store (in-memory) ───────────────────────────────────────────────
 
 let twoFAStore = {}
 
@@ -171,7 +165,6 @@ function remove2FACode(username) {
     delete twoFAStore[username]
 }
 
-// ── File metadata operations ─────────────────────────────────────────────────
 
 async function storeFileMetadata(fileData) {
     const db = await getDatabase()
