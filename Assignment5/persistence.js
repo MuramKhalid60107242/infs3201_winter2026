@@ -15,7 +15,7 @@ async function getDatabase() {
     return dbClient.db("infs3201_winter2026")
 }
 
-// ── Employee operations ──────────────────────────────────────────────────────
+// ── Employee operations 
 
 async function getAllEmployees() {
     const db = await getDatabase()
