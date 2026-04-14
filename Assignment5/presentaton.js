@@ -25,7 +25,7 @@ if (!fs.existsSync(uploadsDir)) {
     fs.mkdirSync(uploadsDir, { recursive: true })
 }
 
-// ── Utility functions ────────────────────────────────────────────────────────
+// ── Utility functions ─────────────────────────────────────────────────────
 
 /**
  * Produces a random 6-character numeric string for use as a 2FA code.
