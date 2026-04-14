@@ -1,0 +1,10 @@
+<h1>Sign In</h1>
+{{#if message}}<p style="color:red">{{message}}</p>{{/if}}
+<form method="POST" action="/login">
+<label>Username</label><br>
+<input name="username" placeholder="Enter your username"><br><br>
+<label>Password</label><br>
+<input name="password" type="password" placeholder="Enter your password"><br><br>
+<button type="submit">Sign In</button>
+</form>
+<p>New here? <a href="/signup">Create an account</a></p>
